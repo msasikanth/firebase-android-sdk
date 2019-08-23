@@ -1,9 +1,12 @@
 # Unreleased (21.1.0)
-- [changed] With disk persistence enabled, query processing time for repeatedly
-  executed queries is now mainly dependent on the size of the result set rather
-  than the size of the locally cached collection. Queries that use the
-  `limit()` API as well as queries that have never or have not recently been
-  been synchronized with the backend may not see improved performance.
+- [changed] Improved performance for local query execution. For queries
+  that have recently been synchronized with the backend, execution time now
+  depends on the size result set rather than on the size of the locally cached
+  collection.
+  Queries that use the `limit()` API may not see improved performance if an
+  unsynchronized document update changes the order of the result set.
+  Furthermore, execution time for all queries degrades if the queried
+  collection received frequent document updates while the query was inactive.
 
 # 21.0.0
 - [changed] Transactions now perform exponential backoff before retrying.
