@@ -1,4 +1,13 @@
-# Unreleased
+# Unreleased (21.1.0)
+- [changed] With disk persistence enabled, query processing time for most
+  queries is now mainly dependent on the size of the result set rather than the
+  size of the locally cached collection. Queries that use the `limit()` API as
+  well as queries that have not been recently executed may not benefit from
+  this change.
+  If you are updating to v21.1.0, only queries that have been synchronized with
+  the backend at least once will see improved performance.
+
+# 21.0.0
 - [changed] Transactions now perform exponential backoff before retrying.
   This means transactions on highly contended documents are more likely to
   succeed.
