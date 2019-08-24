@@ -1,12 +1,8 @@
 # Unreleased (21.1.0)
-- [changed] Improved performance for local query execution. For queries
-  that have recently been synchronized with the backend, execution time now
-  depends on the size result set rather than on the size of the locally cached
-  collection.
-  Queries that use the `limit()` API may not see improved performance if an
-  unsynchronized document update changes the order of the result set.
-  Furthermore, execution time for all queries degrades if the queried
-  collection received frequent document updates while the query was inactive.
+- [changed] Improved the performance of repeatedly executed queries. Recently
+  executed queries should see dramatic improvements. This benefit is reduced
+  if changes accumulate while the query is inactive. Queries that use the
+  `limit()` API may not always benefit, depending on the accumulated changes.
 
 # 21.0.0
 - [changed] Transactions now perform exponential backoff before retrying.
